@@ -1,5 +1,0 @@
-# Type(<scope>): <subject>
-
-# <body>
-
-# <footer>

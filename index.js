@@ -1,103 +1,56 @@
 const display = document.querySelector('.display')
-const controlsDiv = document.querySelector('.controls')
-const controlButtons = controlsDiv.children
+const controlButtons = document.querySelector('.controls').children
+const allSymbols = ['+', '-', 'X', '÷', '%', 'C', '=']
 
-const textContainsArrayElement = (text, array) => {
-  return array.some(element => text.includes(element))
+let firstValue = ''
+let secondValue = ''
+let symbol  = ''
+let result = ''
+
+const calculate = () => {
+  firstValue = parseFloat(firstValue)
+  secondValue = parseFloat(secondValue)
+
+  if (symbol === '+') result = firstValue + secondValue
+  if (symbol === '-') result = firstValue - secondValue
+  if (symbol === 'X') result = firstValue * secondValue
+  if (symbol === '÷') result = firstValue / secondValue
+  if (symbol === '%') result = firstValue % secondValue
+
+  display.innerText = result
+  firstValue = result
+  secondValue = ''
 }
 
-const firstCharacterIsMinus = (text) => {
-  return text[0] === '-'
-}
+/*
+  todo: add backspace functionality
+*/
 
-const lastCharacterIsNaN = (text) => {
-  const indexOfLastCharacter = text.length - 1
-  return isNaN(text[indexOfLastCharacter])
-}
+/*
+  todo: if last character in the display is a symbol and the user clicks on another symbol,
+   replace last character with the new symbol
+*/
 
-const replaceLastCharacter = (text, newCharacter) => {
-  const textArray = text.split('')
-  const indexOfLastCharacter = textArray.length - 1
-  textArray[indexOfLastCharacter] = newCharacter
-  newText = textArray.join('')
-  return newText
-}
-
-const reverseText = (text) => {
-  if (text === "") return ""
-  return reverseText(text.substr(1)) + text.charAt(0);
-}
-
-const clearNodeInnertext = (node) => {
-  node.innerText = ''
-}
-
-const addSymbolToDisplayNode = (value, displayNode, allSymbols) => {
-  if(firstCharacterIsMinus(displayNode.innerText)) {
-    displayNode.innerText = ''
-  }
-  else if (lastCharacterIsNaN(displayNode.innerText)) {
-    displayNode.innerText = replaceLastCharacter(displayNode.innerText, value)
-  }
-  else if (textContainsArrayElement(displayNode.innerText, allSymbols)) {
-    calculate(displayNode)
-    displayNode.innerText += value
-  }
-  else {
-    displayNode.innerText += value
-  }
-}
-
-const addNumberToDisplayNode = (value, displayNode) => {
-  if(firstCharacterIsMinus(displayNode.innerText)) {
-    displayNode.innerText = value
-  }
-  else displayNode.innerText += value
-}
-
-const calculate = (displayNode) => {
-  const values = displayNode.innerText
-  separatedValues = values.split(/(\+|\-|X|\÷|\%)/)
-  const firstValue = parseFloat(separatedValues[0])
-  const symbol = separatedValues[1]
-  const secondValue = parseFloat(separatedValues[2])
-  if (!secondValue) return null
-
-  switch(symbol) {
-    case '+':
-      displayNode.innerText = firstValue + secondValue
-    break
-    case '-':
-      displayNode.innerText = firstValue - secondValue
-    break
-    case 'X':
-      displayNode.innerText = firstValue * secondValue
-    break
-    case '÷':
-      displayNode.innerText = firstValue / secondValue
-    break
-    case '%':
-      displayNode.innerText = firstValue % secondValue
-  }
-}
-
-for(let button of controlButtons) {
-  const allSymbols = ['+', '-', 'X', '÷', '%', '.']
+for (let button of controlButtons) {
   button.addEventListener('click', () => {
-    if (button.innerText === 'C') {
-      clearNodeInnertext(display)
+    const { innerText: btnValue } = button
+    const btnValueIsSymbol = allSymbols.includes(btnValue)
+
+    if (!secondValue && btnValue === '=') return null
+    if (btnValue === 'C') {
+      firstValue = secondValue = symbol = ''
+      return display.innerText = ''
     }
-    else if (button.innerText === '⮌') {
-      display.innerText = reverseText(display.innerText)
+
+    if (firstValue && btnValueIsSymbol) {
+      secondValue && calculate()
+
+      symbol = btnValue
     }
-    else if (button.innerText === '=') {
-      calculate(display)
-    }
-    else if (allSymbols.includes(button.innerText)) {
-      addSymbolToDisplayNode(button.innerText, display, allSymbols)
-    }
-    else {
-      addNumberToDisplayNode(button.innerText, display)
-    }
+
+    else if (!symbol) firstValue += btnValue
+    else if (symbol) secondValue += btnValue
+
+    if (btnValue !== '=') display.innerText += btnValue
   })
 }
