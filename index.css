@@ -1,7 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .calculator {
   background: #101010;
   width: 25em;
-  margin: 2.5em auto;
+  margin: auto;
+  height: 100vh;
+}
+
+@media screen and(max-width: 768px) {
+  .calculator {
+    width: 100vw;
+  }
 }
 
 .display {
