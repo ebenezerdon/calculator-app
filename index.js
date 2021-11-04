@@ -28,6 +28,7 @@ for (let button of controlButtons) {
     const btnValueIsSymbol = allSymbols.includes(btnValue)
 
     if (!secondValue && btnValue === '=') return null
+
     if (btnValue === 'C') {
       firstValue = secondValue = symbol = ''
       return display.innerText = ''
@@ -35,7 +36,6 @@ for (let button of controlButtons) {
 
     if (firstValue && btnValueIsSymbol) {
       secondValue && calculate()
-
       symbol = btnValue
     }
 
