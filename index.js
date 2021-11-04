@@ -22,15 +22,6 @@ const calculate = () => {
   secondValue = ''
 }
 
-/*
-  todo: add backspace functionality
-*/
-
-/*
-  todo: if last character in the display is a symbol and the user clicks on another symbol,
-   replace last character with the new symbol
-*/
-
 for (let button of controlButtons) {
   button.addEventListener('click', () => {
     const { innerText: btnValue } = button
@@ -54,3 +45,12 @@ for (let button of controlButtons) {
     if (btnValue !== '=') display.innerText += btnValue
   })
 }
+
+/*
+  todo: add backspace functionality
+*/
+
+/*
+  todo: if last character in the display is a symbol and the user clicks on another symbol,
+   replace last character with the new symbol
+*/
