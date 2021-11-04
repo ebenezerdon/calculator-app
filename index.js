@@ -39,9 +39,11 @@ for (let button of controlButtons) {
       symbol = btnValue
     }
 
+    // if there's no symbol, that means the user is still inputting first value
     else if (!symbol) firstValue += btnValue
+    // if there's a symbol, that means the user is done with the first value, so add to second
     else if (symbol) secondValue += btnValue
-
+    // don't add the equal-sign to the display
     if (btnValue !== '=') display.innerText += btnValue
   })
 }
