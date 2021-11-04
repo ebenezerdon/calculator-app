@@ -9,14 +9,6 @@
   margin: 5em auto;
 }
 
-@media screen and(max-width: 768px) {
-  .calculator {
-    width: 100vw;
-    height: 100vw;
-    margin: auto;
-  }
-}
-
 .display {
   background: #222222;
   color: #fff;
@@ -60,4 +52,12 @@
 
 .controls .teal:hover {
   background: #006664;
+}
+
+@media screen and (max-width: 768px) {
+  .calculator {
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+  }
 }
