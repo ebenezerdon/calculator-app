@@ -53,6 +53,15 @@ for (let button of controlButtons) {
 */
 
 /*
+  todo: if the value on the screen is a result, and the user clicks on a number,
+   replace the value on the screen with the new number
+*/
+
+/*
   todo: if last character in the display is a symbol and the user clicks on another symbol,
    replace last character with the new symbol
+*/
+
+/*
+  todo: fix => if result is 0, calculator stops calculating
 */
