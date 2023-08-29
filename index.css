@@ -1,12 +1,14 @@
 * {
   margin: 0;
   padding: 0;
+  
 }
 
 .calculator {
-  background: #101010;
+  background: #414040;
   width: 25em;
   margin: 5em auto;
+  border-radius: 5%;
 }
 
 .display {
@@ -18,6 +20,7 @@
   height: 6em;
   line-height: 8em;
   padding: 0 1.5em;
+  border-radius: 10%;
 }
 
 .controls {
